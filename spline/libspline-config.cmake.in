@@ -1,0 +1,10 @@
+@PACKAGE_INIT@ 
+
+set_and_check ( libspline_INCLUDE_DIR "@PACKAGE_libspline_INCLUDE_DIR@")
+
+set(
+  libspline_INCLUDE_DIRS
+  "@PACKAGE_libsimd_INCLUDE_DIRS@"
+  "@PACKAGE_cpplsq_INCLUDE_DIRS@"
+  ${libspline_INCLUDE_DIR}
+)
