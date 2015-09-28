@@ -142,7 +142,7 @@ public:
    template < typename T >
    interval_t findInterval( const T &x ) const
    {
-      int i = findInterval( x, interval_ );
+      auto i = findInterval( x, interval_ );
       interval_ = i;
       return i;
    }
@@ -167,7 +167,7 @@ public:
    template < typename T >
    cpplsq::ValueType<T> operator()( const T &x ) const
    {
-      int i = findInterval( x, interval_ );
+      auto i = findInterval( x, interval_ );
       interval_ = i;
       return getImpl().template evaluate<0>( x, i );
    }

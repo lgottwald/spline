@@ -32,7 +32,7 @@ struct FloatingPointTraits<BSplineCurve<DEG, REAL>>
 template < int DEG, typename REAL >
 struct IntervalTypeTraits<BSplineCurve<DEG, REAL>>
 {
-   using type = long;
+   using type = std::size_t;
 };
 
 template < int DEGREE, typename REAL >
