@@ -198,7 +198,7 @@ BSplineCurve<3, REAL> ApproximatePiecewiseLinear(
    {
       BSplineCurve<3, REAL> curve = ApproximateFunction( f, x, y, nknts, delta, epsilon, minkntdist );
       maxerr = 0;
-      for( interval_t i = 1; i < f.numIntervals(); ++i )
+      for( interval_t i = 1; i < interval_t(f.numIntervals()); ++i )
       {
          REAL x = f.getInfimum( i );
          REAL fx = f( x );
