@@ -245,6 +245,8 @@ public:
    real_t findMin( real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
+      a = std::max(a, getInfimum(0));
+      b = std::min(b, getSupremum(numIntervals()-1));
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;
@@ -302,6 +304,8 @@ public:
    real_t findMax( real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
+      a = std::max(a, getInfimum(0));
+      b = std::min(b, getSupremum(numIntervals()-1));
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;
@@ -443,6 +447,8 @@ private:
    void findMinMax( real_t &minval, real_t &maxval, real_t &minarg, real_t &maxarg, real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
+      a = std::max(a, getInfimum(0));
+      b = std::min(b, getSupremum(numIntervals()-1));
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;

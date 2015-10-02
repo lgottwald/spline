@@ -257,7 +257,7 @@ public:
 
             if( mask )
             {
-               idx =  i - 1 + simd::pack_size<REAL>() - __builtin_popcount( mask ) - DEGREE;
+               idx =  i - 1 + interval_t( simd::pack_size<REAL>() ) - __builtin_popcount( mask ) - DEGREE;
                return std::min( interval_t( numIntervalsImpl() - 1 ), idx );
             }
          }
@@ -284,7 +284,7 @@ public:
 
             if( !( mask & 1 ) )
             {
-               idx = i - 1 + simd::pack_size<T>() - __builtin_popcount( mask ) - DEGREE;
+               idx = i - 1 + interval_t( simd::pack_size<T>() ) - __builtin_popcount( mask ) - DEGREE;
                return std::max( interval_t( 0 ), idx );
             }
          }
