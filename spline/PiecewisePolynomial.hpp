@@ -153,8 +153,6 @@ public:
          coeffs.back()[j] = REAL( 0 );
    }
 
-
-
    REAL getInfimumImpl( const interval_t interval ) const
    {
       return breakpoints[interval];
@@ -163,6 +161,16 @@ public:
    REAL getSupremumImpl( const interval_t interval ) const
    {
       return breakpoints[interval + 1];
+   }
+
+   REAL getInfimumImpl() const
+   {
+      return breakpoints[0];
+   }
+
+   REAL getSupremumImpl() const
+   {
+      return breakpoints[coeffs.size() + 1];
    }
 
    std::size_t numIntervalsImpl() const

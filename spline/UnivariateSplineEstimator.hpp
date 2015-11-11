@@ -299,6 +299,16 @@ public:
       return interval == bitangents.end() ? b : interval->first;
    }
 
+   real_t getInfimumImpl() const
+   {
+      return curve.getInfimum();
+   }
+
+   real_t getSupremumImpl() const
+   {
+      return curve.getSupremum();
+   }
+
    real_t getStart() const
    {
       return a;

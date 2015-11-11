@@ -71,6 +71,16 @@ public:
       return f.getSupremum( interval );
    }
 
+   real_t getInfimumImpl() const
+   {
+      return f.getInfimum();
+   }
+
+   real_t getSupremumImpl() const
+   {
+      return f.getSupremum();
+   }
+
    std::size_t numIntervalsImpl() const
    {
       return f.numIntervals();

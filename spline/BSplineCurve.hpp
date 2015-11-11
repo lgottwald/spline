@@ -210,6 +210,24 @@ public:
    }
 
    /**
+    * Implementation of getInfimum. Returns the infimum of
+    * the first interval.
+    */
+   REAL getInfimumImpl() const
+   {
+      return knots[DEGREE];
+   }
+
+   /**
+    * Implementation of getSupremum. Returns the supremum of
+    * the last interval.
+    */
+   REAL getSupremumImpl() const
+   {
+      return knots[coeffs.size() + 1];
+   }
+
+   /**
     * Implementation of numIntervals. Returns the number
     * of intervals.
     */

@@ -51,6 +51,22 @@ public:
       return getImpl().getSupremumImpl( interval );
    }
 
+     /**
+    * Get the infimum of first interval.
+    */
+   real_t getInfimum() const
+   {
+      return getImpl().getInfimumImpl();
+   }
+
+   /**
+    * Get the supremum of last interval.
+    */
+   real_t getSupremum() const
+   {
+      return getImpl().getSupremumImpl();
+   }
+
    /**
     * Get the number of intervals.
     */
@@ -164,9 +180,19 @@ public:
     *             expression template the type will be the corresponding
     *             type to store the expressions value.
     */
-   template < typename T >
-   cpplsq::ValueType<T> operator()( const T &x ) const
+   template < typename T, typename TVAL = cpplsq::ValueType<T> >
+   TVAL operator()( const T &xp ) const
    {
+      real_t a{getInfimum()};
+      real_t b{getSupremum()};
+
+      TVAL x{xp};
+
+      if( x < a )
+         x = a;
+      else if( x > b )
+         x = b;
+
       auto i = findInterval( x, interval_ );
       interval_ = i;
       return getImpl().template evaluate<0>( x, i );
@@ -188,10 +214,20 @@ public:
    *             expression template the type will be the corresponding
    *             type to store the expressions value.
    */
-   template < int D = 1, typename T >
-   cpplsq::ValueType<T> derivative( const T &x ) const
+   template < int D = 1, typename T, typename TVAL = cpplsq::ValueType<T> >
+   TVAL derivative( const T &xp ) const
    {
-      int i = findInterval( x, interval_ );
+      real_t a{getInfimum()};
+      real_t b{getSupremum()};
+
+      TVAL x{xp};
+
+      if( x < a )
+         x = a;
+      else if( x > b )
+         x = b;
+
+      auto i = findInterval( x, interval_ );
       interval_ = i;
       return getImpl().template evaluate<D>( x, i );
    }
@@ -245,8 +281,8 @@ public:
    real_t findMin( real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
-      a = std::max(a, getInfimum(0));
-      b = std::min(b, getSupremum(numIntervals()-1));
+      a = std::max(a, getInfimum());
+      b = std::min(b, getSupremum());
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;
@@ -304,8 +340,8 @@ public:
    real_t findMax( real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
-      a = std::max(a, getInfimum(0));
-      b = std::min(b, getSupremum(numIntervals()-1));
+      a = std::max(a, getInfimum());
+      b = std::min(b, getSupremum());
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;
@@ -447,8 +483,8 @@ private:
    void findMinMax( real_t &minval, real_t &maxval, real_t &minarg, real_t &maxarg, real_t a, real_t b, real_t tolerance ) const
    {
       auto deriv = differentiate( *this );
-      a = std::max(a, getInfimum(0));
-      b = std::min(b, getSupremum(numIntervals()-1));
+      a = std::max(a, getInfimum());
+      b = std::min(b, getSupremum());
       interval_t l = findInterval( a, interval_ );
       interval_t r = findInterval( b, l );
       interval_ = r;
