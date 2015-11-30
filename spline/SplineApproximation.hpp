@@ -138,7 +138,7 @@ BSplineCurve<3, REAL> ApproximateFunction(
 
    for( std::size_t i = 0; i < nresiduals; ++i )
    {
-      r.emplace_back( x[i], y[i], y[i] + delta );
+      r.emplace_back( x[i], y[i], std::abs(y[i]) + delta );
    }
 
    simd::aligned_vector<REAL> params( nknots - 2, 0.0 );
@@ -191,8 +191,6 @@ BSplineCurve<3, REAL> ApproximatePiecewiseLinear(
    std::vector<REAL> y;
    y.reserve( x.size() );
    std::transform( x.begin(), x.end(), std::back_inserter( y ), [&](REAL x) { return f(x); } );
-   auto y_minmax = std::minmax_element( y.begin(), y.end() );
-   delta  = -*y_minmax.first + delta;
 
    while( 1 )
    {
@@ -202,8 +200,8 @@ BSplineCurve<3, REAL> ApproximatePiecewiseLinear(
       {
          REAL x = f.getInfimum( i );
          REAL fx = f( x );
-         REAL err = ( fx - curve( x ) ) / ( fx + delta );
-         maxerr = std::max(maxerr, std::abs(err) );
+         REAL err = std::abs( fx - curve( x ) ) / ( std::abs(fx) + delta );
+         maxerr = std::max(maxerr, err );
       }
       if( maxerr > max_rel_err )
       {
