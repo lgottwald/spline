@@ -17,24 +17,45 @@ namespace spline
 template < int DEGREE, typename REAL >
 class BSplineCurve;
 
+/**
+ * Specialization of degree traits
+ * for BSplineCurve
+ */
 template < int DEG, typename REAL >
 struct DegreeTraits<BSplineCurve<DEG, REAL>>
 {
    constexpr static int value = DEG;
 };
 
+/**
+ * Specialization of FloatingPointTraits
+ * for BSplineCurve. Used to retrieve
+ * the type used for floating point numbers
+ * in a BSplineCurve.
+ */
 template < int DEG, typename REAL >
 struct FloatingPointTraits<BSplineCurve<DEG, REAL>>
 {
    using type = REAL;
 };
 
+/**
+ * Specialization of IntervalTypeTraits
+ * for BSplineCurve. Used to retrieve
+ * the type that identifies an interval
+ * of the BSplineCurve.
+ */
 template < int DEG, typename REAL >
 struct IntervalTypeTraits<BSplineCurve<DEG, REAL>>
 {
    using type = long;
 };
 
+/**
+ * This class implements a univariate spline curve represented as
+ * a linear combination of bsplines. Uses the CRTP base class
+ * spline::UnivariateSplineCurve and implements the required functionality.
+ */
 template < int DEGREE, typename REAL >
 class BSplineCurve : public UnivariateSplineCurve< BSplineCurve<DEGREE, REAL> >
 {

@@ -40,8 +40,8 @@ struct IntervalTypeTraits< UnivariateSplineEstimator<Impl> >
 };
 
 /**
- * This class is a convex underestimator or a concave overestimator
- * given an interval and an UnivariateSplineCurve.
+ * This class represents a convex underestimator or a concave overestimator
+ * and is created from an interval and an UnivariateSplineCurve.
  */
 template < typename Impl >
 class UnivariateSplineEstimator : public UnivariateSplineCurve< UnivariateSplineEstimator<Impl> >
