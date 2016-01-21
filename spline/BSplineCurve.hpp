@@ -245,7 +245,7 @@ public:
     */
    REAL getSupremumImpl() const
    {
-      return knots[coeffs.size() + 1];
+      return knots[coeffs.size()];
    }
 
    /**
@@ -364,6 +364,7 @@ public:
    template<int D, typename T, typename TVAL = cpplsq::ValueType<T>>
    TVAL evaluate( const T& x, const interval_t interval ) const
    {
+
       if( DEGREE == 0 )
          return coeffs[interval];
 
