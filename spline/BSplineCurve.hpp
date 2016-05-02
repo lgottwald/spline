@@ -11,6 +11,12 @@
 #include <cmath>
 #include <type_traits>
 
+/** @file BSplineCurve.hpp
+ *  @author Robert L. Gottwald
+ *  Implements the computation of splines of any degree following
+ *  [1]: Carl De Boor: B(asic) Spline Basics
+ */
+
 namespace spline
 {
 
@@ -457,6 +463,9 @@ public:
    }
 private:
 
+   /** Compute $\omega_i_k(t) according to [1] Equation 2.4b
+    *  Note that in the implementation k starts at 0, in contrast to the [1] where k starts at 1
+    */
    template<typename T, typename TVAL = cpplsq::ValueType<T>>
    TVAL W( const interval_t i, const int k, const T &x ) const
    {
