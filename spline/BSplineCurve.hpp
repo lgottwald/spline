@@ -370,23 +370,17 @@ public:
    template<int D, typename T, typename TVAL = cpplsq::ValueType<T>>
    TVAL evaluate( const T& x, const interval_t interval ) const
    {
-
       if( DEGREE == 0 )
          return coeffs[interval];
 
+
       /* If this is the first or last interval of a linear spline, slope on the interval is zero and we can return the coefficient */
-      if (DEGREE == 1 && !(D) && interval == 0)
+      if (DEGREE == 1 && !(D) && (interval == 0 || interval == (numIntervalsImpl() - 1)  ) )
       {
          if( interval == 0 )
-         {
-            TVAL val = coeffs[0];
-            //std::cout << "val is " << val << std::endl;
             return coeffs.front();
-         }
-         else if( interval == knots.size() )
-         {
+         else
             return coeffs.back();
-         }
       }
 
       TVAL y( 0.0 );
