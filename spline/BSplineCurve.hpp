@@ -81,6 +81,8 @@ public:
       std::size_t n = simd::next_size<REAL>(knotsCont.size()+2*DEGREE + 2);
       knots.reserve(n);
 
+      /* Add 'artificial' knots before (a) and after (b) first and last knot
+       * distance depends on distance of first (last) two given knots*/
       REAL a = 2 * (*knotsCont.begin()) - *(knotsCont.begin() + 1);
       REAL b = 2 * (*(knotsCont.end() - 1)) - *(knotsCont.end() - 2);
 
@@ -98,6 +100,7 @@ public:
       for( auto i = knots.size(); i <= n; ++i )
          knots.emplace_back(infinity<REAL>());
 
+      /* First and last coefficient are doubled to match +/- infinity */
       coeffs.reserve(coeffsCont.size() + 2);
       coeffs.emplace_back(*(coeffsCont.begin()));
 
