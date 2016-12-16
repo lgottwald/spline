@@ -378,7 +378,7 @@ public:
 
 
       /* If this is the first or last interval of a linear spline, slope on the interval is zero and we can return the coefficient */
-      if (DEGREE == 1 && !(D) && (interval == 0 || interval == (numIntervalsImpl() - 1)  ) )
+      if (DEGREE == 1 && !(D) && (interval == 0 || interval == (interval_t) (numIntervalsImpl() - 1)  ) )
       {
          if( interval == 0 )
             return coeffs.front();
