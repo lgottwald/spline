@@ -4,7 +4,7 @@ include(ExternalProject)
 
 ExternalProject_Add(libcatch
   DOWNLOAD_DIR "${CMAKE_CURRENT_BINARY_DIR}/catch"
-  DOWNLOAD_COMMAND wget https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp
+  DOWNLOAD_COMMAND wget https://raw.githubusercontent.com/catchorg/Catch2/Catch1.x/single_include/catch.hpp  
   UPDATE_COMMAND ""
   INSTALL_COMMAND ""
   BUILD_COMMAND ""
